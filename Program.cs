@@ -6,5 +6,6 @@ class Program
     {
         Console.WriteLine("Sistema de Biblioteca");
         Console.WriteLine("Bienvenido al sistema");
+        Console.ReadLine();
     }
 }
