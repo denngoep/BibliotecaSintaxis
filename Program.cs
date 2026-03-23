@@ -4,6 +4,7 @@ class Program
 {
     static List<string> libros = new List<string>();
     static List<string> usuarios = new List<string>();
+    static List<string> prestamos = new List<string>();
 
     static void Main(string[] args)
     {
@@ -33,6 +34,8 @@ class Program
                 ShowBooksMenu();
             else if (option == "2")
                 ShowUsersMenu();
+            else if (option == "3")
+                ShowLoansMenu();
         }
     }
 
@@ -119,6 +122,74 @@ class Program
         {
             for (int i = 0; i < usuarios.Count; i++)
                 Console.WriteLine($"{i + 1}. {usuarios[i]}");
+        }
+    }
+
+    // ================= PRÉSTAMOS =================
+    static void ShowLoansMenu()
+    {
+        string option = "";
+
+        while (option != "3")
+        {
+            Console.WriteLine("\n=== MENÚ PRÉSTAMOS ===");
+            Console.WriteLine("1. Registrar préstamo");
+            Console.WriteLine("2. Listar préstamos");
+            Console.WriteLine("3. Volver");
+
+            option = Console.ReadLine() ?? "";
+
+            if (option == "1")
+                AddLoan();
+            else if (option == "2")
+                ListLoans();
+        }
+    }
+
+    static void AddLoan()
+    {
+        if (libros.Count == 0 || usuarios.Count == 0)
+        {
+            Console.WriteLine("Debe haber al menos un libro y un usuario.");
+            return;
+        }
+
+        Console.WriteLine("\nSeleccione un usuario:");
+        for (int i = 0; i < usuarios.Count; i++)
+            Console.WriteLine($"{i + 1}. {usuarios[i]}");
+
+        int userIndex = int.Parse(Console.ReadLine() ?? "0") - 1;
+
+        Console.WriteLine("\nSeleccione un libro:");
+        for (int i = 0; i < libros.Count; i++)
+            Console.WriteLine($"{i + 1}. {libros[i]}");
+
+        int bookIndex = int.Parse(Console.ReadLine() ?? "0") - 1;
+
+        if (userIndex >= 0 && userIndex < usuarios.Count &&
+            bookIndex >= 0 && bookIndex < libros.Count)
+        {
+            string prestamo = $"{usuarios[userIndex]} - {libros[bookIndex]}";
+            prestamos.Add(prestamo);
+
+            Console.WriteLine("Préstamo registrado correctamente");
+        }
+        else
+        {
+            Console.WriteLine("Selección inválida");
+        }
+    }
+
+    static void ListLoans()
+    {
+        Console.WriteLine("\nLISTA DE PRÉSTAMOS:");
+
+        if (prestamos.Count == 0)
+            Console.WriteLine("No hay préstamos registrados.");
+        else
+        {
+            for (int i = 0; i < prestamos.Count; i++)
+                Console.WriteLine($"{i + 1}. {prestamos[i]}");
         }
     }
 }
