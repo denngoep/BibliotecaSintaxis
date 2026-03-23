@@ -4,82 +4,80 @@ Aplicación de consola desarrollada en C# (.NET) que permite gestionar libros, u
 
 ---
 
-##Funcionalidades
+## Funcionalidades
 
 El sistema incluye:
 
 ### Gestión de libros
 
-- Agregar libros
-- Listar libros
+* Agregar libros
+* Listar libros
 
-### Gestión de usuarios
+###  Gestión de usuarios
 
-- Agregar usuarios
-- Listar usuarios
+* Agregar usuarios
+* Listar usuarios
 
-### Gestión de préstamos
+###  Gestión de préstamos
 
-- Registrar préstamos
-- Listar préstamos
+* Registrar préstamos
+* Listar préstamos
 
 ### Búsquedas y reportes
 
-- Buscar libros
-- Buscar usuarios
-- Ver reporte general
+* Buscar libros
+* Buscar usuarios
+* Ver reporte general
 
 ### Persistencia de datos
 
-- Guardar información en archivos `.txt`
-- Cargar información desde archivos
+* Guardar información en archivos `.txt`
+* Cargar información desde archivos
 
 ---
 
-## Tecnologías utilizadas
+##  Tecnologías utilizadas
 
-- Lenguaje: C#
-- Plataforma: .NET (Console App)
-- Manejo de archivos: System.IO
+* Lenguaje: C#
+* Plataforma: .NET (Console App)
+* Manejo de archivos: System.IO
 
 ---
 
-## Cómo ejecutar el proyecto
+##  Cómo ejecutar el proyecto
 
 1. Clonar el repositorio:
 
-```bash
+```
 git clone https://github.com/denngoep/BibliotecaSintaxis.git
 ```
 
 2. Entrar a la carpeta del proyecto:
 
-```bash
-cd BibliotecaSintaxis
+```
+cd BibliotecaSintaxis/Biblioteca
 ```
 
 3. Ejecutar la aplicación:
 
-```bash
+```
 dotnet run
 ```
 
 ---
 
-## Estructura del proyecto
+##  Estructura del proyecto
 
-- `Program.cs` → Contiene la lógica principal del sistema
+* `Program.cs` → Contiene la lógica principal del sistema
+* `Models/` → Clases de dominio (Libro, Usuario, Préstamo)
 
 ---
 
-## Notas
-
-- Los datos se guardan localmente en archivos `.txt`
-- Si los archivos no existen, se crean automáticamente al guardar
-- El sistema funciona completamente desde consola
+##  Notas
+* El sistema funciona completamente desde consola
 
 ---
 
 ## Autor
 
-Desarrollado por **Dennis Gonzalez**
+Desarrollado por Dennis Gonzalez
