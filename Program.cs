@@ -1,4 +1,9 @@
-﻿namespace Biblioteca;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace Biblioteca;
 
 class Program
 {
@@ -38,10 +43,13 @@ class Program
                 ShowLoansMenu();
             else if (option == "4")
                 ShowSearchMenu();
+            else if (option == "5")
+                ShowPersistenceMenu();
         }
     }
 
     // ================= LIBROS =================
+
     static void ShowBooksMenu()
     {
         string option = "";
@@ -68,6 +76,7 @@ class Program
         string nombre = Console.ReadLine() ?? "";
 
         libros.Add(nombre);
+
         Console.WriteLine("Libro agregado correctamente");
     }
 
@@ -76,15 +85,20 @@ class Program
         Console.WriteLine("\nLISTA DE LIBROS:");
 
         if (libros.Count == 0)
+        {
             Console.WriteLine("No hay libros registrados.");
+        }
         else
         {
             for (int i = 0; i < libros.Count; i++)
+            {
                 Console.WriteLine($"{i + 1}. {libros[i]}");
+            }
         }
     }
 
     // ================= USUARIOS =================
+
     static void ShowUsersMenu()
     {
         string option = "";
@@ -111,6 +125,7 @@ class Program
         string nombre = Console.ReadLine() ?? "";
 
         usuarios.Add(nombre);
+
         Console.WriteLine("Usuario agregado correctamente");
     }
 
@@ -119,15 +134,20 @@ class Program
         Console.WriteLine("\nLISTA DE USUARIOS:");
 
         if (usuarios.Count == 0)
+        {
             Console.WriteLine("No hay usuarios registrados.");
+        }
         else
         {
             for (int i = 0; i < usuarios.Count; i++)
+            {
                 Console.WriteLine($"{i + 1}. {usuarios[i]}");
+            }
         }
     }
 
     // ================= PRÉSTAMOS =================
+
     static void ShowLoansMenu()
     {
         string option = "";
@@ -150,36 +170,12 @@ class Program
 
     static void AddLoan()
     {
-        if (libros.Count == 0 || usuarios.Count == 0)
-        {
-            Console.WriteLine("Debe haber al menos un libro y un usuario.");
-            return;
-        }
+        Console.Write("Ingrese el préstamo: ");
+        string prestamo = Console.ReadLine() ?? "";
 
-        Console.WriteLine("\nSeleccione un usuario:");
-        for (int i = 0; i < usuarios.Count; i++)
-            Console.WriteLine($"{i + 1}. {usuarios[i]}");
+        prestamos.Add(prestamo);
 
-        int userIndex = int.Parse(Console.ReadLine() ?? "0") - 1;
-
-        Console.WriteLine("\nSeleccione un libro:");
-        for (int i = 0; i < libros.Count; i++)
-            Console.WriteLine($"{i + 1}. {libros[i]}");
-
-        int bookIndex = int.Parse(Console.ReadLine() ?? "0") - 1;
-
-        if (userIndex >= 0 && userIndex < usuarios.Count &&
-            bookIndex >= 0 && bookIndex < libros.Count)
-        {
-            string prestamo = $"{usuarios[userIndex]} - {libros[bookIndex]}";
-            prestamos.Add(prestamo);
-
-            Console.WriteLine("Préstamo registrado correctamente");
-        }
-        else
-        {
-            Console.WriteLine("Selección inválida");
-        }
+        Console.WriteLine("Préstamo registrado correctamente");
     }
 
     static void ListLoans()
@@ -187,67 +183,68 @@ class Program
         Console.WriteLine("\nLISTA DE PRÉSTAMOS:");
 
         if (prestamos.Count == 0)
+        {
             Console.WriteLine("No hay préstamos registrados.");
+        }
         else
         {
             for (int i = 0; i < prestamos.Count; i++)
+            {
                 Console.WriteLine($"{i + 1}. {prestamos[i]}");
+            }
         }
     }
 
     // ================= BÚSQUEDAS =================
+
     static void ShowSearchMenu()
+    {
+        Console.WriteLine("\n=== BÚSQUEDAS Y REPORTES ===");
+        Console.WriteLine("Funcionalidad en construcción...");
+    }
+
+    // ================= PERSISTENCIA =================
+
+    static void ShowPersistenceMenu()
     {
         string option = "";
 
-        while (option != "4")
+        while (option != "3")
         {
-            Console.WriteLine("\n=== BÚSQUEDAS Y REPORTES ===");
-            Console.WriteLine("1. Buscar libro");
-            Console.WriteLine("2. Buscar usuario");
-            Console.WriteLine("3. Ver reporte general");
-            Console.WriteLine("4. Volver");
+            Console.WriteLine("\n=== GUARDAR / CARGAR DATOS ===");
+            Console.WriteLine("1. Guardar datos");
+            Console.WriteLine("2. Cargar datos");
+            Console.WriteLine("3. Volver");
 
             option = Console.ReadLine() ?? "";
 
             if (option == "1")
-                SearchBook();
+                SaveData();
             else if (option == "2")
-                SearchUser();
-            else if (option == "3")
-                ShowReport();
+                LoadData();
         }
     }
 
-    static void SearchBook()
+    static void SaveData()
     {
-        Console.Write("Ingrese nombre del libro: ");
-        string search = Console.ReadLine() ?? "";
+        File.WriteAllLines("libros.txt", libros);
+        File.WriteAllLines("usuarios.txt", usuarios);
+        File.WriteAllLines("prestamos.txt", prestamos);
 
-        foreach (var libro in libros)
-        {
-            if (libro.ToLower().Contains(search.ToLower()))
-                Console.WriteLine(libro);
-        }
+        Console.WriteLine("Datos guardados correctamente");
     }
 
-    static void SearchUser()
+    static void LoadData()
     {
-        Console.Write("Ingrese nombre del usuario: ");
-        string search = Console.ReadLine() ?? "";
+        if (File.Exists("libros.txt"))
+            libros = File.ReadAllLines("libros.txt").ToList();
 
-        foreach (var usuario in usuarios)
-        {
-            if (usuario.ToLower().Contains(search.ToLower()))
-                Console.WriteLine(usuario);
-        }
-    }
+        if (File.Exists("usuarios.txt"))
+            usuarios = File.ReadAllLines("usuarios.txt").ToList();
 
-    static void ShowReport()
-    {
-        Console.WriteLine("\nREPORTE GENERAL:");
-        Console.WriteLine($"Total libros: {libros.Count}");
-        Console.WriteLine($"Total usuarios: {usuarios.Count}");
-        Console.WriteLine($"Total préstamos: {prestamos.Count}");
+        if (File.Exists("prestamos.txt"))
+            prestamos = File.ReadAllLines("prestamos.txt").ToList();
+
+        Console.WriteLine("Datos cargados correctamente");
     }
 }
