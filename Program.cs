@@ -36,6 +36,8 @@ class Program
                 ShowUsersMenu();
             else if (option == "3")
                 ShowLoansMenu();
+            else if (option == "4")
+                ShowSearchMenu();
         }
     }
 
@@ -191,5 +193,61 @@ class Program
             for (int i = 0; i < prestamos.Count; i++)
                 Console.WriteLine($"{i + 1}. {prestamos[i]}");
         }
+    }
+
+    // ================= BÚSQUEDAS =================
+    static void ShowSearchMenu()
+    {
+        string option = "";
+
+        while (option != "4")
+        {
+            Console.WriteLine("\n=== BÚSQUEDAS Y REPORTES ===");
+            Console.WriteLine("1. Buscar libro");
+            Console.WriteLine("2. Buscar usuario");
+            Console.WriteLine("3. Ver reporte general");
+            Console.WriteLine("4. Volver");
+
+            option = Console.ReadLine() ?? "";
+
+            if (option == "1")
+                SearchBook();
+            else if (option == "2")
+                SearchUser();
+            else if (option == "3")
+                ShowReport();
+        }
+    }
+
+    static void SearchBook()
+    {
+        Console.Write("Ingrese nombre del libro: ");
+        string search = Console.ReadLine() ?? "";
+
+        foreach (var libro in libros)
+        {
+            if (libro.ToLower().Contains(search.ToLower()))
+                Console.WriteLine(libro);
+        }
+    }
+
+    static void SearchUser()
+    {
+        Console.Write("Ingrese nombre del usuario: ");
+        string search = Console.ReadLine() ?? "";
+
+        foreach (var usuario in usuarios)
+        {
+            if (usuario.ToLower().Contains(search.ToLower()))
+                Console.WriteLine(usuario);
+        }
+    }
+
+    static void ShowReport()
+    {
+        Console.WriteLine("\nREPORTE GENERAL:");
+        Console.WriteLine($"Total libros: {libros.Count}");
+        Console.WriteLine($"Total usuarios: {usuarios.Count}");
+        Console.WriteLine($"Total préstamos: {prestamos.Count}");
     }
 }
