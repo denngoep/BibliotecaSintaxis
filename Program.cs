@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -46,9 +46,7 @@ class Program
             else if (option == "5")
                 ShowPersistenceMenu();
             else if (option == "6")
-            {
-                Console.WriteLine("\nGracias por usar el sistema de biblioteca 👋");
-            }
+                Console.WriteLine("\nGracias por usar el sistema 👋");
         }
     }
 
@@ -80,7 +78,6 @@ class Program
         string nombre = Console.ReadLine() ?? "";
 
         libros.Add(nombre);
-
         Console.WriteLine("Libro agregado correctamente");
     }
 
@@ -89,16 +86,10 @@ class Program
         Console.WriteLine("\nLISTA DE LIBROS:");
 
         if (libros.Count == 0)
-        {
             Console.WriteLine("No hay libros registrados.");
-        }
         else
-        {
             for (int i = 0; i < libros.Count; i++)
-            {
                 Console.WriteLine($"{i + 1}. {libros[i]}");
-            }
-        }
     }
 
     // ================= USUARIOS =================
@@ -129,7 +120,6 @@ class Program
         string nombre = Console.ReadLine() ?? "";
 
         usuarios.Add(nombre);
-
         Console.WriteLine("Usuario agregado correctamente");
     }
 
@@ -138,16 +128,10 @@ class Program
         Console.WriteLine("\nLISTA DE USUARIOS:");
 
         if (usuarios.Count == 0)
-        {
             Console.WriteLine("No hay usuarios registrados.");
-        }
         else
-        {
             for (int i = 0; i < usuarios.Count; i++)
-            {
                 Console.WriteLine($"{i + 1}. {usuarios[i]}");
-            }
-        }
     }
 
     // ================= PRÉSTAMOS =================
@@ -211,16 +195,10 @@ class Program
         Console.WriteLine("\nLISTA DE PRÉSTAMOS:");
 
         if (prestamos.Count == 0)
-        {
             Console.WriteLine("No hay préstamos registrados.");
-        }
         else
-        {
             for (int i = 0; i < prestamos.Count; i++)
-            {
                 Console.WriteLine($"{i + 1}. {prestamos[i]}");
-            }
-        }
     }
 
     // ================= BÚSQUEDAS =================
@@ -231,10 +209,10 @@ class Program
 
         while (option != "4")
         {
-            Console.WriteLine("\n=== BÚSQUEDAS Y REPORTES ===");
+            Console.WriteLine("\n=== BÚSQUEDAS ===");
             Console.WriteLine("1. Buscar libro");
             Console.WriteLine("2. Buscar usuario");
-            Console.WriteLine("3. Ver reporte general");
+            Console.WriteLine("3. Reporte");
             Console.WriteLine("4. Volver");
 
             option = Console.ReadLine() ?? "";
@@ -250,34 +228,29 @@ class Program
 
     static void SearchBook()
     {
-        Console.Write("Ingrese nombre del libro: ");
+        Console.Write("Buscar libro: ");
         string search = Console.ReadLine() ?? "";
 
         foreach (var libro in libros)
-        {
             if (libro.ToLower().Contains(search.ToLower()))
                 Console.WriteLine(libro);
-        }
     }
 
     static void SearchUser()
     {
-        Console.Write("Ingrese nombre del usuario: ");
+        Console.Write("Buscar usuario: ");
         string search = Console.ReadLine() ?? "";
 
         foreach (var usuario in usuarios)
-        {
             if (usuario.ToLower().Contains(search.ToLower()))
                 Console.WriteLine(usuario);
-        }
     }
 
     static void ShowReport()
     {
-        Console.WriteLine("\nREPORTE GENERAL:");
-        Console.WriteLine($"Total libros: {libros.Count}");
-        Console.WriteLine($"Total usuarios: {usuarios.Count}");
-        Console.WriteLine($"Total préstamos: {prestamos.Count}");
+        Console.WriteLine($"\nLibros: {libros.Count}");
+        Console.WriteLine($"Usuarios: {usuarios.Count}");
+        Console.WriteLine($"Préstamos: {prestamos.Count}");
     }
 
     // ================= PERSISTENCIA =================
@@ -288,9 +261,9 @@ class Program
 
         while (option != "3")
         {
-            Console.WriteLine("\n=== GUARDAR / CARGAR DATOS ===");
-            Console.WriteLine("1. Guardar datos");
-            Console.WriteLine("2. Cargar datos");
+            Console.WriteLine("\n=== PERSISTENCIA ===");
+            Console.WriteLine("1. Guardar");
+            Console.WriteLine("2. Cargar");
             Console.WriteLine("3. Volver");
 
             option = Console.ReadLine() ?? "";
@@ -308,7 +281,7 @@ class Program
         File.WriteAllLines("usuarios.txt", usuarios);
         File.WriteAllLines("prestamos.txt", prestamos);
 
-        Console.WriteLine("Datos guardados correctamente");
+        Console.WriteLine("Datos guardados");
     }
 
     static void LoadData()
@@ -322,6 +295,6 @@ class Program
         if (File.Exists("prestamos.txt"))
             prestamos = File.ReadAllLines("prestamos.txt").ToList();
 
-        Console.WriteLine("Datos cargados correctamente");
+        Console.WriteLine("Datos cargados");
     }
 }
