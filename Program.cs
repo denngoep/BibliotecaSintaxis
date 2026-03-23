@@ -330,15 +330,18 @@ class Program
     // ================= POO =================
 
     static void ProbarModelos()
-    {
-        Console.WriteLine("\n=== PRUEBA DE MODELOS POO ===");
+{
+    Console.WriteLine("\n=== PRUEBA DE MODELOS POO ===");
 
-        Libro libro1 = new Libro("Cien años de soledad", "Gabriel García Márquez", 1967);
-        Usuario usuario1 = new Usuario("Juan Perez", "juan@email.com");
-        Prestamo prestamo1 = new Prestamo(libro1, usuario1);
+    Libro libro1 = new Libro("Cien años de soledad", "Gabriel García Márquez", 1967);
+    Usuario usuario1 = new Usuario("Juan Perez", "juan@email.com");
+    Prestamo prestamo1 = new Prestamo(libro1, usuario1);
 
-        Console.WriteLine(libro1.DetalleCompleto());
-        Console.WriteLine(usuario1.DetalleCompleto());
-        Console.WriteLine(prestamo1.DetalleCompleto());
-    }
+    Console.WriteLine(libro1.DetalleCompleto());
+    Console.WriteLine(usuario1.DetalleCompleto());
+    Console.WriteLine(prestamo1.DetalleCompleto());
+
+    Console.WriteLine($"Días transcurridos: {prestamo1.DiasTranscurridos()}");
+    Console.WriteLine($"¿Está vencido?: {prestamo1.EstaVencido()}");
+}
 }
