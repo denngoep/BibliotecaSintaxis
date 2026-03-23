@@ -329,18 +329,54 @@ class Program
 
     // ================= POO =================
 
-    static void ProbarModelos()
+static void ProbarModelos()
 {
     Console.WriteLine("\n=== PRUEBA DE MODELOS POO ===");
 
+    // Crear libros
     Libro libro1 = new Libro("Cien años de soledad", "Gabriel García Márquez", 1967);
+    Libro libro2 = new Libro("El principito", "Antoine de Saint-Exupéry", 1943);
+
+    //  Crear usuarios
     Usuario usuario1 = new Usuario("Juan Perez", "juan@email.com");
+    Usuario usuario2 = new Usuario("Ana Lopez", "ana@email.com");
+
+    // Crear préstamo
     Prestamo prestamo1 = new Prestamo(libro1, usuario1);
 
+    // ================= RESÚMENES =================
+    Console.WriteLine("\n--- RESÚMENES ---");
+    Console.WriteLine(libro1.ResumenCorto());
+    Console.WriteLine(libro2.ResumenCorto());
+
+    Console.WriteLine(usuario1.ResumenCorto());
+    Console.WriteLine(usuario2.ResumenCorto());
+
+    Console.WriteLine(prestamo1.ResumenCorto());
+
+    // ================= DETALLES =================
+    Console.WriteLine("\n--- DETALLES COMPLETOS ---");
     Console.WriteLine(libro1.DetalleCompleto());
+    Console.WriteLine(libro2.DetalleCompleto());
+
     Console.WriteLine(usuario1.DetalleCompleto());
+    Console.WriteLine(usuario2.DetalleCompleto());
+
     Console.WriteLine(prestamo1.DetalleCompleto());
 
+    // ================= VALIDACIONES =================
+    Console.WriteLine("\n--- VALIDACIONES ---");
+
+    // Libro
+    Console.WriteLine($"Libro 1 disponible: {libro1.Disponible}");
+    Console.WriteLine($"Libro 2 disponible: {libro2.Disponible}");
+
+    // Usuario
+    Console.WriteLine($"Usuario 1 activo: {usuario1.Activo}");
+    Console.WriteLine($"Usuario 2 activo: {usuario2.Activo}");
+
+    // Préstamo
+    Console.WriteLine($"Estado del préstamo: {prestamo1.Estado}");
     Console.WriteLine($"Días transcurridos: {prestamo1.DiasTranscurridos()}");
     Console.WriteLine($"¿Está vencido?: {prestamo1.EstaVencido()}");
 }
