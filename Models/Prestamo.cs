@@ -4,8 +4,8 @@ namespace Biblioteca.Models
 {
     public class Prestamo
     {
-        public Libro Libro { get; set; }
-        public Usuario Usuario { get; set; }
+        public Libro Libro { get; set; } = new Libro("", "", 0);
+        public Usuario Usuario { get; set; } = new Usuario("", "");
         public DateTime FechaPrestamo { get; set; }
         public DateTime? FechaDevolucion { get; set; }
         public EstadoPrestamo Estado { get; set; }

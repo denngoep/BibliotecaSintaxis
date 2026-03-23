@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Biblioteca.Models;
 
 namespace Biblioteca;
 
@@ -23,7 +24,7 @@ class Program
     {
         string option = "";
 
-        while (option != "6")
+        while (option != "7")
         {
             Console.WriteLine("\n=== MENÚ PRINCIPAL ===");
             Console.WriteLine("1. Libros");
@@ -31,7 +32,8 @@ class Program
             Console.WriteLine("3. Préstamos");
             Console.WriteLine("4. Búsquedas y reportes");
             Console.WriteLine("5. Guardar / Cargar datos");
-            Console.WriteLine("6. Salir");
+            Console.WriteLine("6. Probar modelos (POO)");
+            Console.WriteLine("7. Salir");
 
             option = Console.ReadLine() ?? "";
 
@@ -46,9 +48,9 @@ class Program
             else if (option == "5")
                 ShowPersistenceMenu();
             else if (option == "6")
-            {
+                ProbarModelos();
+            else if (option == "7")
                 Console.WriteLine("\nGracias por usar el sistema de biblioteca 👋");
-            }
         }
     }
 
@@ -323,5 +325,20 @@ class Program
             prestamos = File.ReadAllLines("prestamos.txt").ToList();
 
         Console.WriteLine("Datos cargados correctamente");
+    }
+
+    // ================= POO =================
+
+    static void ProbarModelos()
+    {
+        Console.WriteLine("\n=== PRUEBA DE MODELOS POO ===");
+
+        Libro libro1 = new Libro("Cien años de soledad", "Gabriel García Márquez", 1967);
+        Usuario usuario1 = new Usuario("Juan Perez", "juan@email.com");
+        Prestamo prestamo1 = new Prestamo(libro1, usuario1);
+
+        Console.WriteLine(libro1.DetalleCompleto());
+        Console.WriteLine(usuario1.DetalleCompleto());
+        Console.WriteLine(prestamo1.DetalleCompleto());
     }
 }
